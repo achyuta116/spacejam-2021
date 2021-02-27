@@ -12,10 +12,9 @@ const answerToggle = () => {
         console.log(index);
         console.log(item);
         item.addEventListener("click",()=>{
-            console.log(ansCard.classList);
-            console.log(questionCard.classList);
             ansCard.classList.toggle('toggle');
             questionCard.classList.toggle('toggle')
+            
         });
     });
 
