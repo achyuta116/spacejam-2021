@@ -7,18 +7,19 @@ c = conn.cursor()
 
 
 def insert_new_deck(name):
-    c.execute("CREATE TABLE {} (current_interval real, current_EF real, mode text, question text, answer text, next_date text)".format(name))
+    c.execute("CREATE TABLE {} (current_interval real, current_EF real, mode text, question text, answer text, next_date text);".format(name))
 
 
 def insert_new_card(deck_name, question, answer):
     l = list_decks()
     if deck_name not in l:
-        c.execute("CREATE TABLE {} (current_interval real, current_EF real, mode text, question text, answer text, next_date text)".format(deck_name))
-    c.execute('INSERT INTO {} VALUES (1,2.5,"learn","{}","{}","")'.format(deck_name, question, answer))
+        c.execute("CREATE TABLE {}(current_interval real, current_EF real, mode text, question text, answer text, next_date text);".format(deck_name))
+    c.execute('INSERT INTO {} VALUES (1,2.5,"learn","{}","{}","");'.format(deck_name, question, answer))
 
 
 def get_cards(deck_name):
-    return c.execute("SELECT * FROM {}".format(deck_name))
+    c.execute("SELECT * FROM {}".format(deck_name))
+    return c.fetchall()
 
 
 def get_learn_cards(deck_name, learn_limit):
@@ -34,7 +35,9 @@ def get_review_cards(deck_name,review_limit):
     return cards
 
 def list_decks():
-    return c.execute("SELECT name FROM sqlite_master WHERE type='table'")
+    c.execute("SELECT name FROM sqlite_master WHERE type='table'")
+    return list(map(lambda x:x[0],c.fetchall()))
+    
 def intervals(current_intv, current_EF):
     next_intv = []
     for i in range(5):
