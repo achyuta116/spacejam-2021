@@ -25,15 +25,12 @@ def get_cards(deck_name):
 #     return c.execute('SELECT * FROM {} WHERE mode="learn" LIMIT {}'.format(deck_name, learn_limit))
 
 def get_daily_cards(deck_name):
-    rows = c.execute("SELECT * FROM {}".format(deck_name))
-    tuples = []
-    for i in rows:
-        if i[4] == '':
-            tuples.append(i,"learn")
-        else:
-            tuples.append(i,"review")
-    return tuples
-
+    c.execute("SELECT * FROM {} LIMIT 1".format(deck_name))
+    rows = c.fetchall()
+    if rows[0][4] == '':
+        return (rows,"learn")
+    else:
+        return (rows,"review")
 
 # def get_review_cards(deck_name,review_limit):
 #     cards = []
