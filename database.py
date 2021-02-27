@@ -55,7 +55,7 @@ def update_card(deck_name, question, new_interval, new_EF):
     new_date = datetime.date.today()+datetime.timedelta(new_interval)
     c.execute('UPDATE {} set current_interval={}, current_EF={}, next_date={}, mode="review" WHERE question={}'.format(
         deck_name, new_interval, new_EF, question, str(new_date)))
-    c.commit()
+    conn.commit()
 
 def new_EF_calculation(current_EF, q):
     return current_EF+0.1-(5-q)*(0.08+(5-q)*0.02)
@@ -65,3 +65,5 @@ def delete_deck(deck_name):
 
 def delete_card(deck_name, question):
     c.execute("DELETE FROM {} WHERE question={}".format(deck_name, question))
+def close_database():
+    c.close()
