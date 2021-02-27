@@ -4,14 +4,21 @@ const answerToggle = () => {
     const showAnsButton =  document.getElementById("show-intervals-button");
     const ansButtonsArray = document.querySelectorAll(".interval-button");
     const buttons = document.querySelectorAll(".button");
+
+    console.log(ansCard);
+    console.log(questionCard);
+
     buttons.forEach((item,index) => {
         console.log(index);
         console.log(item);
         item.addEventListener("click",()=>{
-           ansCard.classList.toggle("toggle");
-           questionCard.classList.toggle("toggle");
+            console.log(ansCard.classList);
+            console.log(questionCard.classList);
+            ansCard.classList.toggle('toggle');
+            questionCard.classList.toggle('toggle')
         });
     });
+
     ansButtonsArray.forEach((item,index)=>{  
         item.addEventListener("click",()=>{
             //Add the code to update the intervals in database by passing "index" in the function you're using
