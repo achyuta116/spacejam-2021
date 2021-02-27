@@ -13,11 +13,9 @@ const answerToggle = () => {
         console.log(item);
         item.addEventListener("click",()=>{
             ansCard.classList.toggle('toggle');
-            questionCard.classList.toggle('toggle')
-            ansButtonsArray.forEach((item) => {
-                item.classList.toggle('toggle');
-            });
+            questionCard.classList.toggle('toggle');
             showAnsButton.classList.toggle('toggle');
+            document.getElementsByClassName("button-row")[0].classList.toggle(toggle);
         });
     });
 
