@@ -1,17 +1,17 @@
 import sqlite3
 import datetime
+import unittest
+
 conn = sqlite3.connect("decks.db")
 c = conn.cursor()
 
 
 def insert_new_deck(name):
-    c.execute("""CREATE TABLE {}
-    (current_interval real, current_EF real, mode text, question text, answer text, next_date text)""".format(name))
+    c.execute("CREATE TABLE {} (current_interval real, current_EF real, mode text, question text, answer text, next_date text)".format(name))
 
 
 def insert_new_card(deck_name, question, answer):
-    c.execute("""INSERT INTO {} VALUES (1,2.5,"learn","{}","{}","")""".format(
-        deck_name, question, answer))
+    c.execute('INSERT INTO {} VALUES (1,2.5,"learn","{}","{}","")'.format(deck_name, question, answer))
 
 
 def get_cards(deck_name):
@@ -19,11 +19,11 @@ def get_cards(deck_name):
 
 
 def get_learn_cards(deck_name, learn_limit):
-    return c.execute("""SELECT * FROM {} WHERE mode="learn" LIMIT {}""".format(deck_name, learn_limit))
+    return c.execute('SELECT * FROM {} WHERE mode="learn" LIMIT {}'.format(deck_name, learn_limit))
 
 def get_review_cards(deck_name,review_limit):
     cards = []
-    rows = c.execute("""SELECT * FROM {} WHERE mode="review" """.format(deck_name))
+    rows = c.execute('SELECT * FROM {} WHERE mode="review" '.format(deck_name))
     for i in rows:
         date = i['date']
         if date < datetime.date.today():
@@ -47,14 +47,15 @@ def intervals(current_intv, current_EF):
 
 def update_card(deck_name, question, new_interval, new_EF):
     new_date = datetime.date.today()+datetime.timedelta(new_interval)
-    c.execute("""UPDATE {} set current_interval={}, current_EF={}, next_date={}, mode="review" WHERE question={}""".format(
+    c.execute('UPDATE {} set current_interval={}, current_EF={}, next_date={}, mode="review" WHERE question={}'.format(
         deck_name, new_interval, new_EF, question, str(new_date)))
 
 def new_EF_calculation(current_EF, q):
     return current_EF+0.1-(5-q)*(0.08+(5-q)*0.02)
 
 def delete_deck(deck_name):
-    c.execute("""DROP TABLE {}""".format(deck_name))
+    c.execute('DROP TABLE {}'.format(deck_name))
 
 def delete_card(deck_name, question):
     c.execute("DELETE FROM {} WHERE question={}".format(deck_name, question))
+    
