@@ -1,7 +1,7 @@
 const answerToggle = () => {
     const ansCard = document.getElementById("answer");
     const questionCard = document.getElementById("question");
-    const showAnsButton =  document.getElementById("show-intervals-button");
+    const labelledButtonArray =  document.querySelectorAll(".labelled-button");
     const ansButtonsArray = document.querySelectorAll(".interval-button");
     const buttons = document.querySelectorAll(".button");
 
@@ -14,8 +14,10 @@ const answerToggle = () => {
         item.addEventListener("click",()=>{
             ansCard.classList.toggle('toggle');
             questionCard.classList.toggle('toggle');
-            showAnsButton.classList.toggle('toggle');
-            document.getElementsByClassName("button-row")[0].classList.toggle(toggle);
+            labelledButtonArray.forEach((item)=>{
+                item.classList.toggle('toggle');
+            });
+            console.log(labelledButtonArray);
         });
     });
 
