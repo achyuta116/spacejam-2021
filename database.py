@@ -8,14 +8,14 @@ c = conn.cursor()
 
 def insert_new_deck(name):
     c.execute("CREATE TABLE {} (current_interval real, current_EF real, mode text, question text, answer text, next_date text);".format(name))
-
+    conn.commit()
 
 def insert_new_card(deck_name, question, answer):
     l = list_decks()
     if deck_name not in l:
         c.execute("CREATE TABLE {}(current_interval real, current_EF real, mode text, question text, answer text, next_date text);".format(deck_name))
-    c.execute('INSERT INTO {} VALUES (1,2.5,"learn","{}","{}","");'.format(deck_name, question, answer))
-
+    c.execute('INSERT INTO {} VALUES (1,2.5,"learn","{}","{}","");'.format(deck_name, question, answer))   
+    conn.commit()
 
 def get_cards(deck_name):
     c.execute("SELECT * FROM {}".format(deck_name))
@@ -65,6 +65,3 @@ def delete_deck(deck_name):
 
 def delete_card(deck_name, question):
     c.execute("DELETE FROM {} WHERE question={}".format(deck_name, question))
-
-def close_database():
-    c.close()
