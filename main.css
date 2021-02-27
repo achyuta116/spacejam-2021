@@ -47,6 +47,11 @@ html{
     align-items: center;
 }
 
+.toggle{
+    visibility:hidden;
+
+}
+
 .button{
     font-family: inherit;
 }
