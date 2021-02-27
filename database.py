@@ -11,6 +11,9 @@ def insert_new_deck(name):
 
 
 def insert_new_card(deck_name, question, answer):
+    l = list_decks()
+    if deck_name not in l:
+        c.execute("CREATE TABLE {} (current_interval real, current_EF real, mode text, question text, answer text, next_date text)".format(deck_name))
     c.execute('INSERT INTO {} VALUES (1,2.5,"learn","{}","{}","")'.format(deck_name, question, answer))
 
 
@@ -31,7 +34,7 @@ def get_review_cards(deck_name,review_limit):
     return cards
 
 def list_decks():
-    return c.execute("""SELECT name FROM sqlite_master WHERE type='table'""")
+    return c.execute("SELECT name FROM sqlite_master WHERE type='table'")
 def intervals(current_intv, current_EF):
     next_intv = []
     for i in range(5):
@@ -58,4 +61,3 @@ def delete_deck(deck_name):
 
 def delete_card(deck_name, question):
     c.execute("DELETE FROM {} WHERE question={}".format(deck_name, question))
-    
