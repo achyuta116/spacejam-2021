@@ -14,47 +14,48 @@ def v():
     que=StringVar(View)
     e1=Entry(View,textvariable=deck)
     e2=Entry(View,textvariable=que)
-    lb=Listbox(View)
+    lb=Listbox(View,width=500)
     print(list_decks())
     for i in list_decks():
         print(get_cards(i))
         j=0
         while j<len(get_cards(i)):
-            #print(j[3])
-            lb.insert(j,get_cards(i)[j][3])
+            lb.insert(j,"Question: "+get_cards(i)[j][3]+" Answer: "+get_cards(i)[j][4]+" Days Left: "+str(get_cards(i)[j][0]))
             j+=1
     b2=Button(View,text='Back:',command=View.destroy)
     b1=Button(View,text='Delete:',command=lambda:delete_card(deck.get(),que.get()))
-
     l1.grid(row=0,column=5)
     lb.grid(row=1,column=5)
-    '''l2.grid(row=2,column=10)
+    l2.grid(row=2,column=10)
     l3.grid(row=3,column=0)
     e1.grid(row=3,column=10)
     l4.grid(row=4,column=0)
     e2.grid(row=4,column=5)
     b1.grid(row=5,column=5)
-    b2.grid(row=6,column=5)'''
+    b2.grid(row=6,column=5)
     View.mainloop()
     
 def s(deck):
     Solve=Tk()
-    while True:
-        l1=Label(Solve,text="SOLVE")
-        l2=Label(Solve,text=get_cards(deck))
-        b1=Button(Solve,text="Again",command=lambda:ans(10))
-        b2=Button(Solve,text="Incorrect",command=lambda:ans(10))
-        b3=Button(Solve,text="Easy",command=lambda:ans(10))
-        b4=Button(Solve,text="Moderate",command=lambda:ans(10))
-        b5=Button(Solve,text="Difficult",command=lambda:ans(10))
-        b6=Button(Solve,text="Back to Menu",command=Solve.destroy)
-        b7=Button(Solve,text="Next Card")
+
+    def n():
+        Solve.destroy()
+        s(deck)
+
+    l1=Label(Solve,text="SOLVE")
+    l2=Label(Solve,text=get_daily_cards(deck))
+    b2=Button(Solve,text="Incorrect",command=lambda:ans(10))
+    b3=Button(Solve,text="Easy",command=lambda:ans(10))
+    b4=Button(Solve,text="Moderate",command=lambda:ans(10))
+    b5=Button(Solve,text="Difficult",command=lambda:ans(10))
+    b6=Button(Solve,text="Back to Menu",command=Solve.destroy)
+    b7=Button(Solve,text="Next Card",command=n)
     
-        l2=Label(Solve,text="answer")
-        def ans(inter):
-            l2.grid(row=3,column=3)
-            b7.grid(row=5,column=4)
-            print(inter)
+    l2=Label(Solve,text="answer")
+    def ans(inter):
+        l2.grid(row=3,column=3)
+        b7.grid(row=5,column=4)
+        print(inter)
         l1.grid(row=0,column=3)
         b1.grid(row=1,column=1)
         b2.grid(row=1,column=2) 
@@ -66,17 +67,19 @@ def s(deck):
 
 def d():
     Deck=Tk()
-    l1=Label(Deck,text="Choose a Deck:")
-    b1=Button(Deck,text="Math",command=lambda:s("Math"))
-    b2=Button(Deck,text="Chemistry",command=lambda:s("Chemistry"))
-    b3=Button(Deck,text="Law",command=lambda:s("Law"))
-    b4=Button(Deck,text="Biology",command=lambda:s("Biology"))
+    Deck.geometry("500x500")
+    def b():
+        Deck.destroy()
+        s(decks.get())
 
-    l1.grid(row=0,column=3)
-    b1.grid(row=1,column=2)
-    b2.grid(row=1,column=4)
-    b3.grid(row=2,column=2)
-    b4.grid(row=2,column=4)
+    decks=StringVar(Deck)
+    e1=Entry(Deck,textvariable=decks)
+    b1=Button(Deck,text="Go",command=b)
+    l1=Label(Deck,text='Enter a Deck Name',height=5)
+
+    l1.pack()
+    e1.pack()
+    b1.pack()
     Deck.mainloop()
     
 def a():
@@ -94,9 +97,14 @@ def a():
     e2=Entry(Add,textvariable=question)
     e3=Entry(Add,textvariable=answer)
     
-    b1=Button(Add,text="Add",command=lambda:insert_new_card(deck.get(), question.get(), answer.get()))
+    def add():
+        insert_new_card(deck.get(),question.get(),answer.get())
+        question.set("")
+        answer.set("")
+    
+    b1=Button(Add,text="Add",command=add)
     b2=Button(Add,text="Back",command=Add.destroy)
-                    
+
     l1.grid(row=0,column=3)
     l2.grid(row=1,column=0)
     l3.grid(row=2,column=0)
@@ -110,11 +118,11 @@ def a():
     b2.grid(row=4,column=1)
     Add.mainloop()
     
-l=Label(Menu,text="MENU")
-b1=Button(Menu,text='View Cards',command=v,width=25)
-b2=Button(Menu,text='Solve Cards',command=d,width=25)
-b3=Button(Menu,text='Add Card',command=a,width=25)
-b4=Button(Menu,text="Exit",command=Menu.destroy)
+l=Label(Menu,text="MENU",height=5)
+b1=Button(Menu,text='View Cards',command=v,width=25,height=5)
+b2=Button(Menu,text='Solve Cards',command=d,width=25,height=5)
+b3=Button(Menu,text='Add Card',command=a,width=25,height=5)
+b4=Button(Menu,text="Exit",command=Menu.destroy,height=2,width=10)
 l.pack()
 b1.pack()
 b2.pack()
