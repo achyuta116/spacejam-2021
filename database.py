@@ -13,7 +13,7 @@ def insert_new_deck(name):
 def insert_new_card(deck_name, question, answer):
     l = list_decks()
     if deck_name not in l:
-        c.execute("CREATE TABLE {} (current_interval real, current_EF real, mode text, question text, answer text, next_date text)".format(deck_name))
+        c.execute("CREATE TABLE {} (current_interval real, current_EF real, mode text, question text, answer text, next_date text);".format(deck_name))
     c.execute('INSERT INTO {} VALUES (1,2.5,"learn","{}","{}","")'.format(deck_name, question, answer))
 
 
