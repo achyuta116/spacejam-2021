@@ -18,9 +18,11 @@ def v():
     print(list_decks())
     for i in list_decks():
         print(get_cards(i))
-        for j in get_cards(i):
-            print(j[3])
-            #lb.insert(j[3])
+        j=0
+        while j<len(get_cards(i)):
+            #print(j[3])
+            lb.insert(j,get_cards(i)[j][3])
+            j+=1
     b2=Button(View,text='Back:',command=View.destroy)
     b1=Button(View,text='Delete:',command=lambda:delete_card(deck.get(),que.get()))
 
@@ -112,9 +114,10 @@ l=Label(Menu,text="MENU")
 b1=Button(Menu,text='View Cards',command=v,width=25)
 b2=Button(Menu,text='Solve Cards',command=d,width=25)
 b3=Button(Menu,text='Add Card',command=a,width=25)
+b4=Button(Menu,text="Exit",command=Menu.destroy)
 l.pack()
 b1.pack()
 b2.pack()
 b3.pack()
+b4.pack()
 Menu.mainloop()
-close_database()
