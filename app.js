@@ -14,7 +14,10 @@ const answerToggle = () => {
         item.addEventListener("click",()=>{
             ansCard.classList.toggle('toggle');
             questionCard.classList.toggle('toggle')
-            
+            ansButtonsArray.forEach((item) => {
+                item.classList.toggle('toggle');
+            });
+            showAnsButton.classList.toggle('toggle');
         });
     });
 
