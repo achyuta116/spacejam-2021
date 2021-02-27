@@ -36,34 +36,33 @@ def v():
     View.mainloop()
     
 def s(deck):
-    Solve=Tk()
+    Solve=Tk()  
 
     def n():
         Solve.destroy()
         s(deck)
-
+    def ans(inter):
+        l3.grid(row=3,column=3)
+        b7.grid(row=5,column=4)
+    print(get_daily_cards(deck))
     l1=Label(Solve,text="SOLVE")
-    l2=Label(Solve,text=get_daily_cards(deck))
-    b2=Button(Solve,text="Incorrect",command=lambda:ans(10))
-    b3=Button(Solve,text="Easy",command=lambda:ans(10))
-    b4=Button(Solve,text="Moderate",command=lambda:ans(10))
-    b5=Button(Solve,text="Difficult",command=lambda:ans(10))
+    l2=Label(Solve,text=get_daily_cards(deck)[0][0][3])
+    b2=Button(Solve,text="Incorrect",command=lambda:ans(1))
+    b3=Button(Solve,text="Easy",command=lambda:ans(4))
+    b4=Button(Solve,text="Moderate",command=lambda:ans(3))
+    b5=Button(Solve,text="Difficult",command=lambda:ans(2))
     b6=Button(Solve,text="Back to Menu",command=Solve.destroy)
     b7=Button(Solve,text="Next Card",command=n)
+    l3=Label(Solve,text=get_daily_cards(deck)[0][0][4])
     
-    l2=Label(Solve,text="answer")
-    def ans(inter):
-        l2.grid(row=3,column=3)
-        b7.grid(row=5,column=4)
-        print(inter)
-        l1.grid(row=0,column=3)
-        b1.grid(row=1,column=1)
-        b2.grid(row=1,column=2) 
-        b3.grid(row=1,column=3) 
-        b4.grid(row=1,column=4) 
-        b5.grid(row=1,column=5)
-        b6.grid(row=5,column=2)
-        Solve.mainloop()
+    l1.grid(row=0,column=3)
+    b1.grid(row=1,column=1)
+    b2.grid(row=1,column=2) 
+    b3.grid(row=1,column=3) 
+    b4.grid(row=1,column=4) 
+    b5.grid(row=1,column=5)
+    b6.grid(row=5,column=2)
+    Solve.mainloop()
 
 def d():
     Deck=Tk()
@@ -77,9 +76,9 @@ def d():
     b1=Button(Deck,text="Go",command=b)
     l1=Label(Deck,text='Enter a Deck Name',height=5)
 
-    l1.pack()
-    e1.pack()
-    b1.pack()
+    l1.grid(row=0,column=0)
+    e1.grid(row=1,column=0)
+    b1.grid(row=2,column=0)
     Deck.mainloop()
     
 def a():
