@@ -14,19 +14,25 @@ def v():
     que=StringVar(View)
     e1=Entry(View,textvariable=deck)
     e2=Entry(View,textvariable=que)
-    #lb=Listbox(View
-    b2=Button(View,text='Back:',command=View.destroy,height=2)
-    b1=Button(View,text='Delete:',command=lambda:delete_card(deck.get(),que.get()),height=2)
+    lb=Listbox(View)
+    print(list_decks())
+    for i in list_decks():
+        print(get_cards(i))
+        for j in get_cards(i):
+            print(j[3])
+            #lb.insert(j[3])
+    b2=Button(View,text='Back:',command=View.destroy)
+    b1=Button(View,text='Delete:',command=lambda:delete_card(deck.get(),que.get()))
 
-    l1.place(x=250,y=0)
-
-    l2.place(x=250,y=120)
-    l3.place(x=150,y=150)
-    e1.place(x=200,y=150)
-    l4.place(x=150,y=190)
-    e2.place(x=200,y=190)
-    b1.place(x=250,y=240)
-    b2.place(x=250,y=270)
+    l1.grid(row=0,column=5)
+    lb.grid(row=1,column=5)
+    '''l2.grid(row=2,column=10)
+    l3.grid(row=3,column=0)
+    e1.grid(row=3,column=10)
+    l4.grid(row=4,column=0)
+    e2.grid(row=4,column=5)
+    b1.grid(row=5,column=5)
+    b2.grid(row=6,column=5)'''
     View.mainloop()
     
 def s(deck):
@@ -44,25 +50,16 @@ def s(deck):
     
         l2=Label(Solve,text="answer")
         def ans(inter):
-            l2.place(x=3,y=
-    3)
-            b7.place(x=5,y=
-    4)
+            l2.grid(row=3,column=3)
+            b7.grid(row=5,column=4)
             print(inter)
-        l1.place(x=0,y=
-3)
-        b1.place(x=1,y=
-1)
-        b2.place(x=1,y=
-2) 
-        b3.place(x=1,y=
-3) 
-        b4.place(x=1,y=
-4) 
-        b5.place(x=1,y=
-5)
-        b6.place(x=5,y=
-2)
+        l1.grid(row=0,column=3)
+        b1.grid(row=1,column=1)
+        b2.grid(row=1,column=2) 
+        b3.grid(row=1,column=3) 
+        b4.grid(row=1,column=4) 
+        b5.grid(row=1,column=5)
+        b6.grid(row=5,column=2)
         Solve.mainloop()
 
 def d():
@@ -73,11 +70,11 @@ def d():
     b3=Button(Deck,text="Law",command=lambda:s("Law"))
     b4=Button(Deck,text="Biology",command=lambda:s("Biology"))
 
-    l1.place(x=0,y=3)
-    b1.place(x=1,y=2)
-    b2.place(x=1,y=4)
-    b3.place(x=2,y=2)
-    b4.place(x=2,y=4)
+    l1.grid(row=0,column=3)
+    b1.grid(row=1,column=2)
+    b2.grid(row=1,column=4)
+    b3.grid(row=2,column=2)
+    b4.grid(row=2,column=4)
     Deck.mainloop()
     
 def a():
@@ -94,30 +91,29 @@ def a():
     e1=Entry(Add,textvariable=deck)
     e2=Entry(Add,textvariable=question)
     e3=Entry(Add,textvariable=answer)
-                    
-    b1=Button(Add,text="Add",command=insert_new_card(deck.get(), question.get(), answer.get()))
+    
+    b1=Button(Add,text="Add",command=lambda:insert_new_card(deck.get(), question.get(), answer.get()))
     b2=Button(Add,text="Back",command=Add.destroy)
                     
-    l1.place(x=0,y=3)
-    l2.place(x=1,y=0)
-    l3.place(x=2,y=0)
-    l4.place(x=3,y=0)
+    l1.grid(row=0,column=3)
+    l2.grid(row=1,column=0)
+    l3.grid(row=2,column=0)
+    l4.grid(row=3,column=0)
     
-    e1.place(x=1,y=3)
-    e2.place(x=2,y=3)
-    e3.place(x=3,y=3)
+    e1.grid(row=1,column=3)
+    e2.grid(row=2,column=3)
+    e3.grid(row=3,column=3)
     
-    b1.place(x=4,y=5)
-    b2.place(x=4,y=1)
+    b1.grid(row=4,column=5)
+    b2.grid(row=4,column=1)
     Add.mainloop()
     
-l=Label(Menu,text="MENU",height=5)
-b1=Button(Menu,text='View Cards',command=v,height=5,width=25)
-b2=Button(Menu,text='Solve Cards',command=d,height=5,width=25)
-b3=Button(Menu,text='Add Card',command=a,height=5,width=25)
+l=Label(Menu,text="MENU")
+b1=Button(Menu,text='View Cards',command=v,width=25)
+b2=Button(Menu,text='Solve Cards',command=d,width=25)
+b3=Button(Menu,text='Add Card',command=a,width=25)
 l.pack()
 b1.pack()
 b2.pack()
 b3.pack()
 Menu.mainloop()
-
