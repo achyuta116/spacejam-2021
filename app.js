@@ -6,13 +6,13 @@ const answerToggle = () => {
     const buttons = document.querySelectorAll(".button");
     buttons.forEach((item,index) => {
         console.log(index);
+        console.log(item);
         item.addEventListener("click",()=>{
            ansCard.classList.toggle("toggle");
            questionCard.classList.toggle("toggle");
         });
     });
-    ansButtonsArray.forEach((item,index)=>{
-        
+    ansButtonsArray.forEach((item,index)=>{  
         item.addEventListener("click",()=>{
             //Add the code to update the intervals in database by passing "index" in the function you're using
         });
