@@ -65,3 +65,6 @@ def delete_deck(deck_name):
 
 def delete_card(deck_name, question):
     c.execute("DELETE FROM {} WHERE question={}".format(deck_name, question))
+
+def close_database():
+    c.close()
