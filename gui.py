@@ -45,7 +45,6 @@ def v():
 def s(deck):
     Solve=Tk()
     Solve.geometry("500x500") 
-    
     current_EF = get_daily_cards(deck)[0][0][1]
     current_intv = get_daily_cards(deck)[0][0][0]
 
@@ -60,12 +59,12 @@ def s(deck):
         choice = inter
         new_intv = intervals(current_intv,current_EF)
         newEF = new_EF_calculation(current_EF,choice)
-        print(get_daily_cards(deck)[0][0][2])
-        update_card(deck,get_daily_cards(deck)[0][0][2],new_intv,newEF)
+        update_card(deck,get_daily_cards(deck)[0][0][2],new_intv[choice],newEF)
 
     l1=Label(Solve,text="SOLVE",width=10,height=5)
     l4=Label(Solve,text="Question:")
     l5=Label(Solve,text="Answer:")
+    
     l2=Label(Solve,text=get_daily_cards(deck)[0][0][2],width=10,height=2)
     l3=Label(Solve,text=get_daily_cards(deck)[0][0][3],width=10,height=2)
     le=Label(Solve,width=10)
