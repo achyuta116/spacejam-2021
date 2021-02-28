@@ -6,23 +6,27 @@ Menu.geometry("500x500")
 def v():
     View=Tk()
     View.geometry("500x500")
+
     l1=Label(View,text="CARDS",height=5,width=20)
     l2=Label(View,text="Delete",height=2,width=70)
     l3=Label(View,text="Deck:")
     l4=Label(View,text="Question:",height=2)
     le=Label(View)
+
     deck=StringVar(View)
     que=StringVar(View)
     e1=Entry(View,textvariable=deck)
     e2=Entry(View,textvariable=que)
+
     lb=Listbox(View,width=70)
     print(list_decks())
     for i in list_decks():
         print(get_cards(i))
         j=0
         while j<len(get_cards(i)):
-            lb.insert(j,"Question: "+get_cards(i)[j][2]+"     Answer: "+get_cards(i)[j][3]+"     Days Left: "+str(get_cards(i)[j][0]))
+            lb.insert(j,"Deck: "+i+"     Question: "+get_cards(i)[j][2]+"     Answer: "+get_cards(i)[j][3]+"     Days Left: "+str(get_cards(i)[j][0]))
             j+=1
+
     b2=Button(View,text='Back To Menu',command=View.destroy,width=15)
     b1=Button(View,text='Delete',command=lambda:delete_card(deck.get(),que.get()),width=20)
 
@@ -56,6 +60,7 @@ def s(deck):
         choice = inter
         new_intv = intervals(current_intv,current_EF)
         newEF = new_EF_calculation(current_EF,choice)
+        print(get_daily_cards(deck)[0][0][2])
         update_card(deck,get_daily_cards(deck)[0][0][2],new_intv,newEF)
 
     l1=Label(Solve,text="SOLVE",width=10,height=5)
