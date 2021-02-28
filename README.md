@@ -5,5 +5,5 @@ This is an application based on spaced learning i.e a memorization technique usi
 Clone the repository and run gui.py within your terminal
 ```shell
 git clone https://github.com/achyuta116/spacejam-2021.git
-python gui.py
+python main.py
 ```
