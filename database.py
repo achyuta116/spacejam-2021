@@ -30,9 +30,8 @@ def get_daily_cards(deck_name):
     if rows[0][4] == '':
         return (rows,"learn")
     else:
-        day = rows[0][4].substring(0,)
-        date_review = datetime.date(int(rows[0][4].substring(0,rows[0][4].index('-'))),int(rows[0][4].substring(rows[0][4].index('-')+1,rows[0][4].rindex('-'))),int(rows[0][4].substring(rows[0][4].rindex('-'))))
-        if date_review < datetime.date.today():
+        date_review = datetime.date(int(rows[0][4][0:rows[0][4].index('-')]),int(rows[0][4][rows[0][4].index('-')+1:rows[0][4].rindex('-')]),int(rows[0][4][rows[0][4].rindex('-')+1:]))
+        if (date_review < datetime.date.today()) :
             return (rows,"review")
         else:
             return ([],'')
@@ -66,9 +65,11 @@ def intervals(current_intv, current_EF):
 
 def update_card(deck_name, question, new_interval, new_EF):
     new_date = datetime.date.today()+datetime.timedelta(new_interval)
-    c.execute('UPDATE {} SET current_interval={}, current_EF={}, next_date={} WHERE question={}'.format(
+    print('UPDATE {} SET current_interval={}, current_EF={}, next_date={} WHERE question={}'.format(
         deck_name, new_interval, new_EF, question, str(new_date)))
-    c.commit()
+    c.execute('UPDATE {} SET current_interval={}, current_EF={}, next_date={} WHERE question={}'.format(
+        deck_name, new_interval, new_EF,'"'+str(new_date)+'"', '"'+question+'"'))
+    conn.commit()
 
 def new_EF_calculation(current_EF, q):
     return current_EF+0.1-(4-q)*(0.08+(4-q)*0.02)
