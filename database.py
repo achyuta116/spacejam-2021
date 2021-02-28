@@ -66,7 +66,7 @@ def update_card(deck_name, question, new_interval, new_EF):
     c.commit()
 
 def new_EF_calculation(current_EF, q):
-    return current_EF+0.1-(4-q)*(0.08+(5-q)*0.02)
+    return current_EF+0.1-(4-q)*(0.08+(4-q)*0.02)
 
 # def delete_deck(deck_name):
 #     c.execute('DROP TABLE {}'.format(deck_name))
