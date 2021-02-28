@@ -30,7 +30,12 @@ def get_daily_cards(deck_name):
     if rows[0][4] == '':
         return (rows,"learn")
     else:
-        return (rows,"review")
+        day = rows[0][4].substring(0,)
+        date_review = datetime.date(int(rows[0][4].substring(0,rows[0][4].index('-'))),int(rows[0][4].substring(rows[0][4].index('-')+1,rows[0][4].rindex('-'))),int(rows[0][4].substring(rows[0][4].rindex('-'))))
+        if date_review < datetime.date.today():
+            return (rows,"review")
+        else:
+            return ([],'')
 
 
 # def get_review_cards(deck_name,review_limit):
@@ -61,15 +66,25 @@ def intervals(current_intv, current_EF):
 
 def update_card(deck_name, question, new_interval, new_EF):
     new_date = datetime.date.today()+datetime.timedelta(new_interval)
-    c.execute('UPDATE {} set current_interval={}, current_EF={}, next_date={}, mode="review" WHERE question={}'.format(
+    c.execute('UPDATE {} SET current_interval={}, current_EF={}, next_date={} WHERE question={}'.format(
         deck_name, new_interval, new_EF, question, str(new_date)))
     c.commit()
 
 def new_EF_calculation(current_EF, q):
-    return current_EF+0.1-(4-q)*(0.08+(4-q)*0.02)
+    return current_EF+0.1-(4-q)*(0.08+(5-q)*0.02)
 
 # def delete_deck(deck_name):
 #     c.execute('DROP TABLE {}'.format(deck_name))
+
+def decrease_date(deck_name):
+    rows = c.execute("SELECT * FROM {}".format(deck_name))
+    for i in rows:
+        date = datetime.date(int(i[4].substring(0,i[4].index('-'))),int(i[4].substring(i[4].index('-')+1,i[4].rindex('-'))),int(i[4].substring(i[4].rindex('-'))))
+        date = date + datetime.timedelta(-1)
+        c.execute("UPDATE {} SET next_date={} WHERE question={}".format(deck_name,str(date),i[2]))
+        conn.commit()
+
+
 
 def delete_card(deck_name, question):
     c.execute("DELETE FROM {} WHERE question={}".format(deck_name, question))
