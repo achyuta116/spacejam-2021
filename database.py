@@ -32,6 +32,7 @@ def get_daily_cards(deck_name):
     else:
         return (rows,"review")
 
+
 # def get_review_cards(deck_name,review_limit):
 #     cards = []
 #     rows = c.execute('SELECT * FROM {} WHERE mode="review" '.format(deck_name))
