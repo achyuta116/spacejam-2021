@@ -37,31 +37,44 @@ def v():
     
 def s(deck):
     Solve=Tk()  
+    current_EF = get_daily_cards(deck)[0][0][1]
+    current_intv = get_daily_cards(deck)[0][0][0]
 
     def n():
-        Solve.destroy()
+        Solve.destroy() 
         s(deck)
+
     def ans(inter):
         l3.grid(row=3,column=3)
         b7.grid(row=5,column=4)
+        choice = inter
+        new_intv = intervals(current_intv,current_EF)
+        newEF = new_EF_calculation(current_EF,choice)
+        update_card(deck,get_daily_cards(deck)[0][0][2],new_intv,newEF)
+
     print(get_daily_cards(deck))
     l1=Label(Solve,text="SOLVE")
-    l2=Label(Solve,text=get_daily_cards(deck)[0][0][3])
+    l2=Label(Solve,text=get_daily_cards(deck)[0][0][2])
     b2=Button(Solve,text="Incorrect",command=lambda:ans(1))
     b3=Button(Solve,text="Easy",command=lambda:ans(4))
-    b4=Button(Solve,text="Moderate",command=lambda:ans(3))
+    b4=Button(Solve,text="Good",command=lambda:ans(3))
     b5=Button(Solve,text="Difficult",command=lambda:ans(2))
     b6=Button(Solve,text="Back to Menu",command=Solve.destroy)
     b7=Button(Solve,text="Next Card",command=n)
-    l3=Label(Solve,text=get_daily_cards(deck)[0][0][4])
-    
-    l1.grid(row=0,column=3)
-    b1.grid(row=1,column=1)
-    b2.grid(row=1,column=2) 
-    b3.grid(row=1,column=3) 
-    b4.grid(row=1,column=4) 
-    b5.grid(row=1,column=5)
-    b6.grid(row=5,column=2)
+    l3=Label(Solve,text=get_daily_cards(deck)[0][0][3])
+
+    #Put question button somewhere here ig
+
+    if get_daily_cards(deck)[1] == '':
+        b4.grid(row=1,column=4)
+    else:
+        l1.grid(row=0,column=3)
+        b1.grid(row=1,column=1)
+        b2.grid(row=1,column=2) 
+        b3.grid(row=1,column=3) 
+        b4.grid(row=1,column=4) 
+        b5.grid(row=1,column=5)
+        b6.grid(row=5,column=2)
     Solve.mainloop()
 
 def d():
